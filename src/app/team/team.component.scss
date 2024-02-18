@@ -1,0 +1,106 @@
+section {
+  display: grid;
+  gap: 1rem;
+  margin: 32px auto;
+  max-width: 1024px;
+  padding: 0 12px;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+.player {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 32px;
+  &__container {
+    display: grid;
+    gap: 1rem;
+  }
+  &__dialog {
+    ::ng-deep {
+      .p-dialog-content {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+    width: 100%;
+    max-width: 400px;
+  }
+  &__info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  &__input {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__name {
+    margin: 0;
+    &-container {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      ::ng-deep {
+        button {
+          padding: 0;
+          height: 2rem;
+          width: 2rem;
+        }
+      }
+    }
+  }
+
+  &__submit-button {
+    ::ng-deep {
+      button {
+        padding: 12px 48px;
+      }
+    }
+  }
+}
+
+.new-player {
+  display: grid;
+  gap: 1rem;
+  &__form {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+.starting-players {
+  display: grid;
+  gap: 1rem;
+  h2 {
+    margin: 0;
+  }
+  ul {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    align-items: flex-end;
+    display: flex;
+    font-size: 20px;
+    font-weight: 700;
+    gap: 12px;
+    span {
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+}
+
+.d-flex {
+  display: flex;
+  gap: 8px;
+}

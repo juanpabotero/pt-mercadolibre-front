@@ -1,0 +1,134 @@
+<section class="starting-players">
+  <h1>Soccer Team</h1>
+
+  <p-button
+    class="player__submit-button"
+    label="Get Starting Players"
+    (onClick)="getTeam()"
+  ></p-button>
+
+  @if (startingPlayers && startingPlayers.players.length > 0) {
+  <h2>Starting Players:</h2>
+  <ul class="starting-players__player">
+    @for (startingPLayer of startingPlayers.players; track $index) {
+    <li>
+      {{ startingPLayer.name }} <span>{{ startingPLayer.score }}</span>
+    </li>
+    }
+  </ul>
+  }
+</section>
+
+<section>
+  <h1>Training</h1>
+
+  <div class="new-player">
+    <p-button
+      class="player__submit-button"
+      label="Create new player"
+      severity="secondary"
+      (onClick)="isInputNewPLayerVisible = true"
+    ></p-button>
+    @if (isInputNewPLayerVisible) {
+    <form class="new-player__form" (submit)="addNewPlayer()">
+      <input
+        type="text"
+        pInputText
+        [(ngModel)]="newPLayerName"
+        name="newPLayerName"
+        placeholder="Messi"
+      />
+      <p-button
+        class="player__submit-button"
+        label="Create"
+        severity="success"
+        type="submit"
+      />
+      <p-button
+        icon="pi pi-times"
+        [rounded]="true"
+        [text]="true"
+        severity="danger"
+        (onClick)="isInputNewPLayerVisible = false; newPLayerName = ''"
+      ></p-button>
+    </form>
+    }
+  </div>
+
+  <form class="player" [formGroup]="form" (onSubmit)="onSubmit()">
+    <ng-container formArrayName="trainings">
+      @for (trainingForm of trainings.controls; track $index;) {
+      <div [formGroup]="trainingForm" class="player__container">
+        <div class="player__name-container">
+          <h3 class="player__name">{{ players.players[$index].name }}</h3>
+          <p-button
+            icon="pi pi-times"
+            [rounded]="true"
+            [text]="true"
+            severity="danger "
+          ></p-button>
+        </div>
+        <div class="player__info">
+          <div class="player__input">
+            <label class="block font-bold mb-2" for="locale-user">Power:</label>
+            <p-inputNumber
+              formControlName="power"
+              inputId="locale-user"
+            ></p-inputNumber>
+          </div>
+          <div class="player__input">
+            <label class="block font-bold mb-2" for="locale-user">
+              Distance:
+            </label>
+            <p-inputNumber
+              formControlName="distance"
+              inputId="locale-user"
+            ></p-inputNumber>
+          </div>
+          <div class="player__input">
+            <label class="block font-bold mb-2" for="locale-user">Time:</label>
+            <p-inputNumber
+              formControlName="time"
+              inputId="locale-user"
+            ></p-inputNumber>
+          </div>
+          <div class="player__input">
+            <label class="block font-bold mb-2" for="locale-user"
+              >Passes:</label
+            >
+            <p-inputNumber
+              formControlName="passes"
+              inputId="locale-user"
+            ></p-inputNumber>
+          </div>
+        </div>
+      </div>
+      }
+    </ng-container>
+    <p-button
+      class="player__submit-button"
+      label="Submit"
+      severity="success"
+      (onClick)="onSubmit()"
+    ></p-button>
+  </form>
+</section>
+
+<p-dialog
+  [showHeader]="false"
+  [(visible)]="isDialogVisible"
+  [modal]="true"
+  class="player__dialog"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <p style="margin-bottom: 16px">
+    {{ message }}
+  </p>
+  <p-button
+    class="player__submit-button"
+    label="close"
+    severity="secondary"
+    (onClick)="isDialogVisible = false"
+  ></p-button>
+</p-dialog>
