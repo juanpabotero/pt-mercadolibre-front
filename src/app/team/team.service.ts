@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import {
+  DeletePLayerResponse,
   Player,
   PlayersResponse,
   TeamResponse,
@@ -43,6 +44,12 @@ export class TeamService {
   public getTeam(): Observable<TeamResponse> {
     return this.http.get<TeamResponse>(
       `${environment.apiUrl}${this.PATH_TEAM}`
+    );
+  }
+
+  public removePlayer(id: number): Observable<DeletePLayerResponse> {
+    return this.http.delete<DeletePLayerResponse>(
+      `${environment.apiUrl}${this.PATH_PLAYERS}/${id}`
     );
   }
 }

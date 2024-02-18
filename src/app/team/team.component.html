@@ -65,7 +65,8 @@
             icon="pi pi-times"
             [rounded]="true"
             [text]="true"
-            severity="danger "
+            severity="danger"
+            (onClick)="removePlayer(players.players[$index].id)"
           ></p-button>
         </div>
         <div class="player__info">

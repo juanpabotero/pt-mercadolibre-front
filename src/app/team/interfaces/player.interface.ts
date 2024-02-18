@@ -16,3 +16,8 @@ export interface PlayersWithStats extends Player {
 export interface PlayersWithScore extends Player {
   score: number;
 }
+
+export interface DeletePLayerResponse {
+  raw: any[];
+  affected: number;
+}

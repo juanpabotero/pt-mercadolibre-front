@@ -66,12 +66,7 @@ export class TeamComponent {
   ) {}
 
   public ngOnInit() {
-    this.teamService.getPLayers().subscribe((response: PlayersResponse) => {
-      this.players = response;
-      response.players.forEach(() => {
-        this.addTraining();
-      });
-    });
+    this.getPlayers();
   }
 
   public addNewPlayer() {
@@ -95,9 +90,36 @@ export class TeamComponent {
     });
   }
 
+  public getPlayers() {
+    this.teamService.getPLayers().subscribe((response: PlayersResponse) => {
+      this.players = response;
+      response.players.forEach(() => {
+        this.addTraining();
+      });
+    });
+  }
+
   public getTeam() {
     this.teamService.getTeam().subscribe((response: TeamResponse) => {
       this.startingPlayers = response;
+    });
+  }
+
+  public removePlayer(id: number | undefined) {
+    if (id === undefined) return;
+    this.teamService.removePlayer(id).subscribe({
+      next: () => {
+        this.isDialogVisible = true;
+        this.message = 'Player removed successfully';
+        this.form.reset();
+        this.trainings.clear();
+        this.startingPlayers = undefined;
+        this.getPlayers();
+      },
+      error: () => {
+        this.isDialogVisible = true;
+        this.message = 'Error removing player';
+      },
     });
   }
 
