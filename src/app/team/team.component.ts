@@ -18,6 +18,7 @@ import {
   PlayersResponse,
   TeamResponse,
   TrainingForm,
+  Response,
 } from './interfaces';
 import { TeamService } from './team.service';
 
@@ -48,7 +49,7 @@ export class TeamComponent {
 
   public newPLayerName = '';
 
-  public message = '<xc<xc<asgsffgsfgdfgdsfñk  ksjdfkjk kjkfdjk';
+  public message = '';
 
   public players!: PlayersResponse;
 
@@ -100,8 +101,19 @@ export class TeamComponent {
   }
 
   public getTeam() {
-    this.teamService.getTeam().subscribe((response: TeamResponse) => {
-      this.startingPlayers = response;
+    this.teamService.getTeam().subscribe({
+      next: (response: TeamResponse | Response) => {
+        if ('message' in response) {
+          this.isDialogVisible = true;
+          this.message = response.message;
+          return;
+        }
+        this.startingPlayers = response as TeamResponse;
+      },
+      error: () => {
+        this.isDialogVisible = true;
+        this.message = 'Error getting team';
+      },
     });
   }
 

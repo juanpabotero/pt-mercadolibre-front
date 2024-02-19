@@ -1,7 +1,7 @@
 import { FormControl } from '@angular/forms';
 import { PlayersWithStats } from './player.interface';
 
-export interface TrainingResponse {
+export interface Response {
   message: string;
 }
 

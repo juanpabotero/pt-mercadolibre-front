@@ -6,9 +6,9 @@ import {
   DeletePLayerResponse,
   Player,
   PlayersResponse,
+  Response,
   TeamResponse,
   Training,
-  TrainingResponse,
 } from './interfaces';
 
 @Injectable({
@@ -17,39 +17,38 @@ import {
 export class TeamService {
   constructor(private readonly http: HttpClient) {}
 
+  private readonly API_URL = environment.API_URL;
   private readonly PATH_PLAYERS = '/players';
   private readonly PATH_TEAM = '/team';
   private readonly PATH_TRAINING = '/training';
 
-  public createTrainig(training: Training): Observable<TrainingResponse> {
-    return this.http.post<TrainingResponse>(
-      `${environment.apiUrl}${this.PATH_TRAINING}`,
+  public createTrainig(training: Training): Observable<Response> {
+    return this.http.post<Response>(
+      `${this.API_URL}${this.PATH_TRAINING}`,
       training
     );
   }
 
   public createPLayer(player: Player): Observable<Player> {
     return this.http.post<Player>(
-      `${environment.apiUrl}${this.PATH_PLAYERS}`,
+      `${this.API_URL}${this.PATH_PLAYERS}`,
       player
     );
   }
 
   public getPLayers(): Observable<PlayersResponse> {
     return this.http.get<PlayersResponse>(
-      `${environment.apiUrl}${this.PATH_PLAYERS}`
+      `${this.API_URL}${this.PATH_PLAYERS}`
     );
   }
 
   public getTeam(): Observable<TeamResponse> {
-    return this.http.get<TeamResponse>(
-      `${environment.apiUrl}${this.PATH_TEAM}`
-    );
+    return this.http.get<TeamResponse>(`${this.API_URL}${this.PATH_TEAM}`);
   }
 
   public removePlayer(id: number): Observable<DeletePLayerResponse> {
     return this.http.delete<DeletePLayerResponse>(
-      `${environment.apiUrl}${this.PATH_PLAYERS}/${id}`
+      `${this.API_URL}${this.PATH_PLAYERS}/${id}`
     );
   }
 }
