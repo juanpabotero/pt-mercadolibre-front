@@ -4,9 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build-dev": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "dev:ssr": "ng run test:serve-ssr",
+    "serve:ssr": "node dist/test/server/main.js",
+    "build:ssr": "ng build && ng run test:server",
+    "prerender": "ng run test:prerender",
+    "config": "node src/environments/set-env.js",
+    "vercel-build": "npm run config && npm run build:ssr"
   },
   "private": true,
   "dependencies": {
@@ -30,6 +36,7 @@
     "@angular/cli": "^17.2.0",
     "@angular/compiler-cli": "^17.2.0",
     "@types/jasmine": "~5.1.0",
+    "@types/node": "^20.11.19",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
