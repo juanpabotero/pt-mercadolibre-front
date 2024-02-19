@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'https://pt-mercadolibre-back-production.up.railway.app',
 };
