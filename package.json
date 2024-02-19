@@ -4,15 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build-dev": "ng build",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "dev:ssr": "ng run test:serve-ssr",
-    "serve:ssr": "node dist/test/server/main.js",
-    "build:ssr": "ng build && ng run test:server",
-    "prerender": "ng run test:prerender",
-    "config": "node src/environments/set-env.js",
-    "vercel-build": "npm run config && npm run build:ssr"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
